@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrainDonor.Mongo", "BrainDonor.Mongo\BrainDonor.Mongo.csproj", "{8F6719E4-9725-4B43-B157-B5D81AC1862D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.Web", "Example.Web\Example.Web.csproj", "{E94EE87F-C1ED-4118-A894-2832CC9808DF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A5CB4A64-7406-498F-BB7E-C1E3E53F44D7}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8F6719E4-9725-4B43-B157-B5D81AC1862D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F6719E4-9725-4B43-B157-B5D81AC1862D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F6719E4-9725-4B43-B157-B5D81AC1862D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F6719E4-9725-4B43-B157-B5D81AC1862D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E94EE87F-C1ED-4118-A894-2832CC9808DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E94EE87F-C1ED-4118-A894-2832CC9808DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E94EE87F-C1ED-4118-A894-2832CC9808DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E94EE87F-C1ED-4118-A894-2832CC9808DF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
