@@ -1,0 +1,33 @@
+﻿@using BrainDonor.Mongo.Provider
+@using Example.Web.Data;
+@model IQueryable<Role>
+@{
+    ViewBag.Title = "Role Collection";
+    ViewBag.Header = "View All";
+    ViewBag.ActiveSection = "Role";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+    var grid = new WebGrid(source: Model, defaultSort: "_id Ascending", rowsPerPage: 20, canSort: false);
+}
+
+@grid.GetHtml(
+    tableStyle: "table table-striped",
+    columns: grid.Columns(
+        grid.Column("Name", "Name", x => x.Name),
+        grid.Column("Description", "Description", x => x.Description),
+        grid.Column("_id", "Id", x => x._id),
+        grid.Column("Actions", "Actions",
+            x => Html.Raw(
+                Html.ActionLink("View", "Display", new { Id = x._id }, new { @class = "btn smaller btn-primary" }).ToString()
+                    + "&nbsp;&nbsp;"
+                    + Html.ActionLink("Edit", "Edit", new { Id = x._id }, new { @class = "btn smaller" }).ToString()
+                    + "&nbsp;&nbsp;"
+                    + Html.ActionLink("Delete", "Delete", new { Id = x._id }, new { @class = "btn smaller" }).ToString()
+            )
+        )
+    )
+)
+
+<div class="form-actions">
+    <a href="@Url.Action("Create")" class="btn btn-primary">Create New</a>
+</div>

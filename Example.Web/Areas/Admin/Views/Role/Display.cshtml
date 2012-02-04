@@ -1,0 +1,28 @@
+﻿@using Example.Web.Data
+@model Role
+@{
+    ViewBag.Title = "Role Collection";
+    ViewBag.Header = "Display Role";
+    ViewBag.ActiveSection = "Role";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="form-horizontal">
+    <div class="control-group">
+        <label>Id</label>
+        <div class="controls value">@Model._id</div>
+    </div>
+    <div class="control-group">
+        <label>Name</label>
+        <div class="controls value">@Model.Name</div>        
+    </div>
+    <div class="control-group">
+        <label>Description</label>
+        <div class="controls value">@Model.Description</div>
+    </div>
+    <div class="form-actions">
+        <a href="@Url.Action("Edit", new { Id = Model._id })" class="btn btn-primary">Edit</a>
+        <a href="@Url.Action("Delete", new { Id = Model._id })" class="btn">Delete</a>
+        <a href="@Url.Action("Index")" class="btn">Cancel</a>
+    </div>
+</div>

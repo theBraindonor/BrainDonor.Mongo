@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Example.Web Admin - @ViewBag.Title</title>
+
+    <script src="/Scripts/jquery-1.5.1.js"></script>
+    <script src="/Scripts/jquery.validate.min.js"></script>
+    <script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="/Content/admin.js"></script>
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="/Content/bootstrap.css" rel="stylesheet" />
+    <link href="/Content/bootstrap.responsive.css" rel="stylesheet" />
+    <link href="/Content/admin.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="brand" href="/Admin/">Example.Web - User Administration</a>
+        </div>
+      </div>
+    </div>
+
+<div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+          <div class="well sidebar-nav">
+            <ul class="nav nav-pills nav-stacked">
+                <li @Html.Raw(ViewBag.ActiveSection == null ? "class=\"active\"" : string.Empty)><a href="/Admin/Home/">Home</a></li>
+                <li @Html.Raw(ViewBag.ActiveSection == "User" ? "class=\"active\"" : string.Empty)><a href="/Admin/User/">User Collection</a></li>
+                <li @Html.Raw(ViewBag.ActiveSection == "Role" ? "class=\"active\"" : string.Empty)><a href="/Admin/Role/">Role Collection</a></li>
+            </ul>
+        </div><!--/.well -->
+        </div><!--/span-->
+        <div class="span9">
+          <div class="page-header">
+          <h1>@ViewBag.Title - @ViewBag.Header</h1>
+        </div>
+        <div class="row">
+          <div class="span16 ajax-form-wrapper">
+            @RenderBody()
+          </div>
+        </div>
+      </div>
+
+    </div>
+        
+  </body>
+</html>

@@ -1,0 +1,40 @@
+﻿@using Example.Web.Areas.Admin.Models
+@model RoleDeleteModel
+@{
+    ViewBag.Title = "Role Collection";
+    ViewBag.Header = "Delete Role";
+    ViewBag.ActiveSection = "Role";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Delete", "Role", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.Id)
+    @Html.HiddenFor(x => x.Name)
+    <fieldset>
+        <legend>Please confirm role deletion</legend>
+        <div class="control-group">
+            @Html.LabelFor(x => x.Id)
+            <div class="controls value">@Model.Id</div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(x => x.Name)
+            <div class="controls value">@Model.Name</div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(x => x.Confirmation)
+            <div class="controls">
+                <label class="checkbox">
+                    @Html.CheckBoxFor(x => x.Confirmation)
+                    <span>This role will be permanently deleted.</span>
+                    @Html.ValidationMessageFor(x => x.Confirmation)
+                </label>
+            </div>
+        </div>
+        <div class="form-actions">
+            <input type="submit" class="btn btn-primary" value="Delete" />
+            <a href="@Url.Action("Index")" class="btn">Cancel</a>
+        </div>
+    </fieldset>
+}

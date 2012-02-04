@@ -1,0 +1,76 @@
+﻿@using Example.Web.Data
+@using Example.Web.Areas.Admin.Models
+@model UserCreateModel
+@{
+    ViewBag.Title = "User Collection";
+    ViewBag.Header = "Create New";
+    ViewBag.ActiveSection = "User";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Create", "User", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    <fieldset>
+        <div class="control-group">
+            @Html.LabelFor(x => x.Username)
+            <div class="controls">
+                @Html.TextBoxFor(x => x.Username)
+                @Html.ValidationMessageFor(x => x.Username)
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(x => x.Email)
+            <div class="controls">
+                @Html.TextBoxFor(x => x.Email)
+                @Html.ValidationMessageFor(x => x.Email)
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(x => x.Comment)
+            <div class="controls">
+                @Html.TextAreaFor(x => x.Comment)
+                @Html.ValidationMessageFor(x => x.Comment)
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <label class="checkbox">
+                    @Html.CheckBoxFor(x => x.IsApproved)
+                    <span>Is Approved</span>
+                    @Html.ValidationMessageFor(x => x.IsApproved)
+                </label>
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(x => x.Password)
+            <div class="controls">
+                @Html.PasswordFor(x => x.Password)
+                @Html.ValidationMessageFor(x => x.Password)
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(x => x.PasswordConfirm)
+            <div class="controls">
+                @Html.PasswordFor(x => x.PasswordConfirm)
+                @Html.ValidationMessageFor(x => x.PasswordConfirm)
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(x => x.Roles)
+            <div class="controls">
+                @foreach (var role in (from r in Role.AsQueryable() select r))
+                {
+                    <label class="checkbox">
+                        <input type="checkbox" name="Roles" value="@role.Name"  @(Model != null && Model.Roles.Contains(role.Name) ? "checked=\"checked\"" : string.Empty) />
+                        <span>@role.Name</span>                                 
+                    </label>
+                }
+            </div>
+        </div>
+        <div class="form-actions">
+            <input type="submit" class="btn btn-primary" value="Create" />
+            <a href="@Url.Action("Index")" class="btn">Cancel</a>
+        </div>
+    </fieldset>
+}

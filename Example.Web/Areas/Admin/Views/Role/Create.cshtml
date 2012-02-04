@@ -1,0 +1,34 @@
+﻿@using Example.Web.Areas.Admin.Models
+@model RoleEditModel
+@{
+    ViewBag.Title = "Role Collection";
+    ViewBag.Header = "Create New";
+    ViewBag.ActiveSection = "Role";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Create", "Role", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    <fieldset>
+        <legend>All fields are required.</legend>
+        <div class="control-group">
+            @Html.LabelFor(x => x.Name)
+            <div class="controls">
+                @Html.TextBoxFor(x => x.Name)
+                @Html.ValidationMessageFor(x => x.Name)
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(x => x.Description)
+            <div class="controls">
+                @Html.TextAreaFor(x => x.Description, new { @class = "xxlarge" })
+                @Html.ValidationMessageFor(x => x.Description)
+            </div>
+        </div>
+        <div class="form-actions">
+            <input type="submit" class="btn btn-primary" value="Create" />
+            <a href="@Url.Action("Index")" class="btn">Cancel</a>
+        </div>
+    </fieldset>
+}

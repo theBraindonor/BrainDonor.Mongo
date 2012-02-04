@@ -1,0 +1,67 @@
+﻿@using Example.Web.Areas.Admin.Models
+@model UserEditModel
+@{
+    ViewBag.Title = "User Collection";
+    ViewBag.Header = "Display User";
+    ViewBag.ActiveSection = "User";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="form-horizontal">
+    <fieldset>
+        <div class="control-group">
+            @Html.LabelFor(x => x.Id)
+            <div class="controls value">@Html.DisplayTextFor(x => x.Id)</div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(x => x.Username)
+            <div class="controls value">@Html.DisplayTextFor(x => x.Username)</div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(x => x.Email)
+            <div class="controls value">@Html.DisplayTextFor(x => x.Email)</div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(x => x.Comment)
+            <div class="controls value">@Html.DisplayTextFor(x => x.Comment)</div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(x => x.IsApproved)
+            <div class="controls value">@Html.DisplayTextFor(x => x.IsApproved)</div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(x => x.IsLockedOut)
+            <div class="controls value">@Html.DisplayTextFor(x => x.IsLockedOut)</div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(x => x.CreationDate)
+            <div class="controls value">@Html.DisplayTextFor(x => x.CreationDate)</div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(x => x.LastLoginDate)
+            <div class="controls value">@Html.DisplayTextFor(x => x.LastLoginDate)</div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(x => x.LastActivityDate)
+            <div class="controls value">@Html.DisplayTextFor(x => x.LastActivityDate)</div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(x => x.LastPasswordChangedDate)
+            <div class="controls value">@Html.DisplayTextFor(x => x.LastPasswordChangedDate)</div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(x => x.LastLockedOutDate)
+            <div class="controls value">@Html.DisplayTextFor(x => x.LastLockedOutDate)</div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(x => x.Roles)
+            <div class="controls value">@(string.Join(", ", Model.Roles.ToArray()))</div>
+        </div>
+        <div class="form-actions">
+            <a href="@Url.Action("Edit", new { Id = Model.Id })" class="btn btn-primary">Edit</a>
+            <a href="@Url.Action("Password", new { Id = Model.Id })" class="btn">Change Password</a>
+            <a href="@Url.Action("Delete", new { Id = Model.Id })" class="btn">Delete</a>
+            <a href="@Url.Action("Index")" class="btn">Cancel</a>
+        </div>
+    </fieldset>
+</div>

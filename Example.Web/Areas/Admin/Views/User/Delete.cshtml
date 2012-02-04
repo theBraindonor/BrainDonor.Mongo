@@ -1,0 +1,40 @@
+﻿@using Example.Web.Areas.Admin.Models
+@model UserDeleteModel
+@{
+    ViewBag.Title = "User Collection";
+    ViewBag.Header = "Delete User";
+    ViewBag.ActiveSection = "User";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Delete", "User", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.Id)
+    @Html.HiddenFor(x => x.Username)
+    <fieldset>
+        <legend>Please confirm user deletion</legend>
+        <div class="control-group">
+            @Html.LabelFor(x => x.Id)
+            <div class="controls value">@Model.Id</div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(x => x.Username)
+            <div class="controls value">@Model.Username</div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(x => x.Confirmation)
+            <div class="controls">
+                <label class="checkbox">
+                    @Html.CheckBoxFor(x => x.Confirmation)
+                    <span>This user will be permanently deleted.</span>
+                    @Html.ValidationMessageFor(x => x.Confirmation)
+                </label>
+            </div>
+        </div>
+        <div class="form-actions">
+            <input type="submit" class="btn btn-primary" value="Delete" />
+            <a href="@Url.Action("Index")" class="btn">Cancel</a>
+        </div>
+    </fieldset>
+}
