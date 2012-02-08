@@ -12,6 +12,7 @@ using Example.Web.Areas.Admin.Models;
 
 namespace Example.Web.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Administrators")]
     public class UserController : Controller
     {
         public ActionResult Index()

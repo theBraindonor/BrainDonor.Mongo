@@ -14,7 +14,10 @@ namespace BrainDonor.Mongo.Provider
         where U : MongoUser<U>
         where R : MongoRole<R>
     {
-        private MembershipUser GetMembershipUser(U user_record)
+
+        protected string default_admin_username = string.Empty;
+
+        protected MembershipUser GetMembershipUser(U user_record)
         {
             return new MembershipUser("MongoMembershipProvider",
                 user_record.Username,
@@ -29,6 +32,16 @@ namespace BrainDonor.Mongo.Provider
                 user_record.LastLockedOutDate,
                 user_record.LastPasswordChangedDate,
                 user_record.LastLockedOutDate);
+        }
+
+        public override void Initialize(string name, System.Collections.Specialized.NameValueCollection config)
+        {
+            base.Initialize(name, config);
+
+            if (config.AllKeys.Contains("DefaultAdminUser"))
+            {
+                default_admin_username = config["DefaultAdminUser"];
+            }
         }
 
         public override string ApplicationName
@@ -350,6 +363,11 @@ namespace BrainDonor.Mongo.Provider
             U user = (from u in MongoUser<U>.AsQueryable() where u.Username == username && u.PasswordHash == password_hash select u).FirstOrDefault();
             
             if (user != null) return true;
+
+            if (FormsAuthentication.Authenticate(username, password))
+            {
+                return true;
+            }
 
             return false;
         }

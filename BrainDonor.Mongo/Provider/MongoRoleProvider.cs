@@ -7,12 +7,27 @@ using System.Web.Security;
 
 namespace BrainDonor.Mongo.Provider
 {
-    //TODO: Hard-code Amin/Admin so that user in web config works.
-
     public class MongoRoleProvider<U, R> : System.Web.Security.RoleProvider
         where U : MongoUser<U>
         where R : MongoRole<R>
     {
+        protected string default_admin_username = string.Empty;
+        protected string default_admin_role = string.Empty;
+
+        public override void Initialize(string name, System.Collections.Specialized.NameValueCollection config)
+        {
+            base.Initialize(name, config);
+
+            if (config.AllKeys.Contains("DefaultAdminUser"))
+            {
+                default_admin_username = config["DefaultAdminUser"];
+            }
+            if (config.AllKeys.Contains("DefaultAdminRole"))
+            {
+                default_admin_role = config["DefaultAdminRole"];
+            }
+        }
+
         public override void AddUsersToRoles(string[] usernames, string[] role_names)
         {
             foreach (string username in usernames)
@@ -108,6 +123,14 @@ namespace BrainDonor.Mongo.Provider
         {
             if (string.IsNullOrEmpty(username)) throw new ArgumentException();
 
+            if (!string.IsNullOrEmpty(default_admin_username))
+            {
+                if (default_admin_username == username)
+                {
+                    return new string[] { default_admin_role };
+                }
+            }
+
             U user = MongoUser<U>.AsQueryable().Where(x => x.Username == username).FirstOrDefault();
 
             if (user == null) throw new ProviderException();
@@ -130,11 +153,19 @@ namespace BrainDonor.Mongo.Provider
         {
             if (string.IsNullOrEmpty(username)) throw new ArgumentException();
 
+            if (string.IsNullOrEmpty(role_name)) throw new ArgumentException();
+
+            if (!string.IsNullOrEmpty(default_admin_username) && !string.IsNullOrEmpty(default_admin_role))
+            {
+                if (username == default_admin_username && role_name == default_admin_role)
+                {
+                    return true;
+                }
+            }
+
             U user = MongoUser<U>.AsQueryable().Where(x => x.Username == username).FirstOrDefault();
 
             if (user == null) throw new ProviderException();
-
-            if (string.IsNullOrEmpty(role_name)) throw new ArgumentException();
 
             R role = MongoRole<R>.AsQueryable().Where(x => x.Name == role_name).FirstOrDefault();
 

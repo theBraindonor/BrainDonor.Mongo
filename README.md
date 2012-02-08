@@ -67,5 +67,6 @@ An example website is included to demonstrate the utilities in action.  This exa
 * Dependancies necessary to reference the MongoDB utilities.
 * Implemented the providers in the Example.Web.Data namespace.
 * Added the MongoDB connection string and providers to Web.config.
+* Added a default credentials and role assignment so that you can log in with an empty mongo database.
 * Added the Bson ObjectId binder to Global.asax.
 * Added the Admin area for user and role administration which is built using Bootstrap from Twitter.

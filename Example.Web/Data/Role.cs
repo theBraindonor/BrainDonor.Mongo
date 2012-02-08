@@ -7,7 +7,7 @@ using BrainDonor.Mongo.Provider;
 
 namespace Example.Web.Data
 {
-    public class RoleProviders : MongoRoleProvider<User, Role>
+    public class RoleProvider : MongoRoleProvider<User, Role>
     {
     }
 
