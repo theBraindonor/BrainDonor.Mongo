@@ -9,8 +9,7 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
-
-using FluentMongo.Linq;
+using MongoDB.Driver.Linq;
 
 namespace BrainDonor.Mongo.Data
 {
